@@ -1,0 +1,23 @@
+cmake_minimum_required(VERSION 3.10)
+project(FluidSimulation CUDA CXX)
+
+# Find CUDA
+find_package(CUDA REQUIRED)
+
+# Set C++ standard
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+# Add CUDA compilation flags
+set(CUDA_NVCC_FLAGS ${CUDA_NVCC_FLAGS};-std=c++14;-O3;-arch=sm_50)
+
+# Create the executable
+cuda_add_executable(fluid_sim src/main.cu)
+
+# Optional: Link against additional libraries if needed
+# target_link_libraries(fluid_sim ${OPTIONAL_LIBS})
+
+# Installation rules
+install(TARGETS fluid_sim DESTINATION bin)
+
+#
